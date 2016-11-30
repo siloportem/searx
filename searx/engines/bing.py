@@ -13,7 +13,6 @@
  @todo        publishedDate
 """
 
-from urllib import urlencode
 from cgi import escape
 from lxml import html
 from searx.engines.xpath import extract_text
@@ -37,7 +36,7 @@ def request(query, params):
                                          query.decode('utf-8')).encode('utf-8')
 
     search_path = search_string.format(
-        query=urlencode({'q': query}),
+        query=params['urlencode']({'q': query}),
         offset=offset)
 
     params['url'] = base_url + search_path

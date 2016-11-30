@@ -13,7 +13,6 @@
 # @todo        parse video, audio and file results
 
 from json import loads
-from urllib import urlencode
 from dateutil import parser
 
 # engine dependent config
@@ -44,7 +43,7 @@ def request(query, params):
     search_type = search_types.get(params.get('category'), '0')
 
     params['url'] = base_url +\
-        search_url.format(query=urlencode({'query': query}),
+        search_url.format(query=params['urlencode']({'query': query}),
                           offset=offset,
                           limit=number_of_results,
                           search_type=search_type)

@@ -1,13 +1,18 @@
 from lxml import html
-from urllib import urlencode, unquote
-from urlparse import urlparse, urljoin
 from lxml.etree import _ElementStringResult, _ElementUnicodeResult
 from searx.utils import html_to_text
+
+try:
+    from urllib import unquote
+    from urlparse import urlparse, urljoin
+except:
+    from urllib.parse import urljoin, urlparse, unquote
 
 search_url = None
 url_xpath = None
 content_xpath = None
 title_xpath = None
+paging = False
 suggestion_xpath = ''
 results_xpath = ''
 
@@ -83,7 +88,7 @@ def normalize_url(url):
 
 
 def request(query, params):
-    query = urlencode({'q': query})[2:]
+    query = params['urlencode']({'q': query})[2:]
 
     fp = {'query': query}
     if paging and search_url.find('{pageno}') >= 0:

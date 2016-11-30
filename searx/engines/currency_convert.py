@@ -1,15 +1,19 @@
-from datetime import datetime
+import json
 import re
 import os
-import json
+import sys
 import unicodedata
 
+from datetime import datetime
+
+if sys.version_info[0] == 3:
+    unicode = str
 
 categories = []
 url = 'https://download.finance.yahoo.com/d/quotes.csv?e=.csv&f=sl1d1t1&s={query}=X'
 weight = 100
 
-parser_re = re.compile(u'.*?(\\d+(?:\\.\\d+)?) ([^.0-9]+) (?:in|to) ([^.0-9]+)', re.I)  # noqa
+parser_re = re.compile(b'.*?(\\d+(?:\\.\\d+)?) ([^.0-9]+) (?:in|to) ([^.0-9]+)', re.I)
 
 db = 1
 
@@ -35,7 +39,7 @@ def iso4217_to_name(iso4217, language):
 
 
 def request(query, params):
-    m = parser_re.match(unicode(query, 'utf8'))
+    m = parser_re.match(query)
     if not m:
         # wrong query
         return params

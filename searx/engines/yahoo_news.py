@@ -9,7 +9,6 @@
 # @stable      no (HTML can change)
 # @parse       url, title, content, publishedDate
 
-from urllib import urlencode
 from lxml import html
 from searx.engines.xpath import extract_text, extract_url
 from searx.engines.yahoo import parse_url
@@ -44,7 +43,7 @@ def request(query, params):
         language = params['language'].split('_')[0]
 
     params['url'] = search_url.format(offset=offset,
-                                      query=urlencode({'p': query}),
+                                      query=params['urlencode']({'p': query}),
                                       lang=language)
 
     # TODO required?

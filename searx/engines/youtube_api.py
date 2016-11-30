@@ -9,7 +9,6 @@
 # @parse       url, title, content, publishedDate, thumbnail, embedded
 
 from json import loads
-from urllib import urlencode
 from dateutil import parser
 
 # engine dependent config
@@ -31,7 +30,7 @@ base_youtube_url = 'https://www.youtube.com/watch?v='
 
 # do search-request
 def request(query, params):
-    params['url'] = search_url.format(query=urlencode({'q': query}),
+    params['url'] = search_url.format(query=params['urlencode']({'q': query}),
                                       api_key=api_key)
 
     # add language tag if specified

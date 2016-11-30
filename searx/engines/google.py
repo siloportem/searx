@@ -10,11 +10,14 @@
 
 import re
 from cgi import escape
-from urllib import urlencode
-from urlparse import urlparse, parse_qsl
 from lxml import html, etree
 from searx.engines.xpath import extract_text, extract_url
 from searx.search import logger
+
+try:
+    from urlparse import urlparse, parse_qsl
+except:
+    from urllib.parse import urlparse, parse_qsl
 
 logger = logger.getChild('google engine')
 
@@ -182,7 +185,7 @@ def request(query, params):
         google_hostname = default_hostname
 
     params['url'] = search_url.format(offset=offset,
-                                      query=urlencode({'q': query}),
+                                      query=params['urlencode']({'q': query}),
                                       hostname=google_hostname,
                                       lang=url_lang)
     if params['time_range'] in time_range_dict:

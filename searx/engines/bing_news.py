@@ -11,12 +11,16 @@
  @parse       url, title, content, publishedDate, thumbnail
 """
 
-from urllib import urlencode
-from urlparse import urlparse, parse_qsl
 from datetime import datetime
 from dateutil import parser
 from lxml import etree
 from searx.utils import list_get
+
+try:
+    from urlparse import urlparse, parse_qsl
+    from urllib import urlencode
+except:
+    from urllib.parse import urlencode, urlparse, parse_qsl
 
 # engine dependent config
 categories = ['news']
@@ -82,7 +86,7 @@ def request(query, params):
 def response(resp):
     results = []
 
-    rss = etree.fromstring(resp.content)
+    rss = etree.fromstring(resp.text)
 
     ns = rss.nsmap
 

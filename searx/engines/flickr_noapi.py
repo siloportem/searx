@@ -12,7 +12,6 @@
  @parse       url, title, thumbnail, img_src
 """
 
-from urllib import urlencode
 from json import loads
 from time import time
 import re
@@ -48,7 +47,7 @@ def _get_time_range_url(time_range):
 
 
 def request(query, params):
-    params['url'] = (search_url.format(query=urlencode({'text': query}), page=params['pageno'])
+    params['url'] = (search_url.format(query=params['urlencode']({'text': query}), page=params['pageno'])
                      + _get_time_range_url(params['time_range']))
     return params
 

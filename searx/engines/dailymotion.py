@@ -12,7 +12,6 @@
  @todo        set content-parameter with correct data
 """
 
-from urllib import urlencode
 from json import loads
 from cgi import escape
 from datetime import datetime
@@ -37,7 +36,7 @@ def request(query, params):
         locale = params['language']
 
     params['url'] = search_url.format(
-        query=urlencode({'search': query, 'localization': locale}),
+        query=params['urlencode']({'search': query, 'localization': locale}),
         pageno=params['pageno'])
 
     return params

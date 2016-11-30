@@ -10,7 +10,6 @@
 """
 
 from cgi import escape
-from urllib import urlencode
 from searx.engines.xpath import extract_text
 from lxml import html
 
@@ -25,8 +24,7 @@ search_url = base_url + 'repository/browse/?{query}'
 
 # do search-request
 def request(query, params):
-    query = urlencode({'fdfilter': query,
-                       'fdpage': params['pageno']})
+    query = params['urlencode']({'fdfilter': query, 'fdpage': params['pageno']})
     params['url'] = search_url.format(query=query)
     return params
 

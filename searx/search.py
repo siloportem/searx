@@ -16,8 +16,8 @@ along with searx. If not, see < http://www.gnu.org/licenses/ >.
 '''
 
 import gc
+import sys
 import threading
-from thread import start_new_thread
 from time import time
 from uuid import uuid4
 import searx.poolrequests as requests_lib
@@ -30,6 +30,19 @@ from searx.query import RawTextQuery, SearchQuery
 from searx.results import ResultContainer
 from searx import logger
 from searx.plugins import plugins
+
+try:
+    from thread import start_new_thread
+except:
+    from _thread import start_new_thread
+
+try:
+    from urllib import urlencode
+except:
+    from urllib.parse import urlencode
+
+if sys.version_info[0] == 3:
+    unicode = str
 
 logger = logger.getChild('search')
 
@@ -87,7 +100,8 @@ def default_request_params():
         'data': {},
         'url': '',
         'cookies': {},
-        'verify': True
+        'verify': True,
+        'urlencode': urlencode
     }
 
 
@@ -317,7 +331,7 @@ class Search(object):
 
             # update request parameters dependent on
             # search-engine (contained in engines folder)
-            engine.request(search_query.query.encode('utf-8'), request_params)
+            engine.request(search_query.query, request_params)
 
             if request_params['url'] is None:
                 # TODO add support of offline engines

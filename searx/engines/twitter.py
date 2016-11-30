@@ -12,11 +12,14 @@
  @todo        publishedDate
 """
 
-from urlparse import urljoin
-from urllib import urlencode
 from lxml import html
 from datetime import datetime
 from searx.engines.xpath import extract_text
+
+try:
+    from urlparse import urljoin
+except:
+    from urllib.parse import urljoin
 
 # engine dependent config
 categories = ['social media']
@@ -36,7 +39,7 @@ timestamp_xpath = './/span[contains(@class,"_timestamp")]'
 
 # do search-request
 def request(query, params):
-    params['url'] = search_url + urlencode({'q': query})
+    params['url'] = search_url + params['urlencode']({'q': query})
 
     # set language if specified
     if params['language'] != 'all':

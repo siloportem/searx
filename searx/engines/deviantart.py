@@ -12,7 +12,6 @@
  @todo        rewrite to api
 """
 
-from urllib import urlencode
 from lxml import html
 import re
 from searx.engines.xpath import extract_text
@@ -37,7 +36,7 @@ def request(query, params):
     offset = (params['pageno'] - 1) * 24
 
     params['url'] = search_url.format(offset=offset,
-                                      query=urlencode({'q': query}))
+                                      query=params['urlencode']({'q': query}))
     if params['time_range'] in time_range_dict:
         params['url'] += time_range_url.format(range=time_range_dict[params['time_range']])
 

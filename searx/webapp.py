@@ -22,7 +22,6 @@ if __name__ == '__main__':
     from os.path import realpath, dirname
     path.append(realpath(dirname(realpath(__file__)) + '/../'))
 
-import cStringIO
 import hashlib
 import hmac
 import json
@@ -42,8 +41,6 @@ except:
     exit(1)
 
 from datetime import datetime, timedelta
-from urllib import urlencode
-from urlparse import urlparse, urljoin
 from werkzeug.contrib.fixers import ProxyFix
 from flask import (
     Flask, request, render_template, url_for, Response, make_response,
@@ -78,6 +75,16 @@ try:
 except ImportError:
     logger.critical("The pyopenssl, ndg-httpsclient, pyasn1 packages have to be installed.\n"
                     "Some HTTPS connections will fail")
+try:
+    from urllib import urlencode
+    from urlparse import urlparse, urljoin
+except:
+    from urllib.parse import urlencode, urlparse, urljoin
+
+try:
+    import cStringIO
+except:
+    from io import StringIO as cStringIO
 
 # serve pages with HTTP/1.1
 from werkzeug.serving import WSGIRequestHandler
@@ -369,7 +376,7 @@ def render(template_name, override_theme=None, **kwargs):
 def pre_request():
     request.errors = []
 
-    preferences = Preferences(themes, categories.keys(), engines, plugins)
+    preferences = Preferences(themes, list(categories.keys()), engines, plugins)
     request.preferences = preferences
     try:
         preferences.parse_cookies(request.cookies)
@@ -433,8 +440,8 @@ def index():
     for result in results:
         if output_format == 'html':
             if 'content' in result and result['content']:
-                result['content'] = highlight_content(result['content'][:1024], search_query.query.encode('utf-8'))
-            result['title'] = highlight_content(result['title'], search_query.query.encode('utf-8'))
+                result['content'] = highlight_content(result['content'][:1024], search_query.query)
+            result['title'] = highlight_content(result['title'], search_query.query)
         else:
             if result.get('content'):
                 result['content'] = html_to_text(result['content']).strip()
@@ -479,7 +486,7 @@ def index():
             csv.writerow([row.get(key, '') for key in keys])
         csv.stream.seek(0)
         response = Response(csv.stream.read(), mimetype='application/csv')
-        cont_disp = 'attachment;Filename=searx_-_{0}.csv'.format(search_query.query.encode('utf-8'))
+        cont_disp = 'attachment;Filename=searx_-_{0}.csv'.format(search_query.query)
         response.headers.add('Content-Disposition', cont_disp)
         return response
     elif output_format == 'rss':

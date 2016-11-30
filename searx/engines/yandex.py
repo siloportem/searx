@@ -10,7 +10,6 @@
 """
 
 from cgi import escape
-from urllib import urlencode
 from lxml import html
 from searx.search import logger
 
@@ -40,7 +39,7 @@ def request(query, params):
     lang = params['language'].split('_')[0]
     host = base_url.format(tld=language_map.get(lang) or default_tld)
     params['url'] = host + search_url.format(page=params['pageno'] - 1,
-                                             query=urlencode({'text': query}))
+                                             query=params['urlencode']({'text': query}))
     return params
 
 

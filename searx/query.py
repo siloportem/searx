@@ -21,8 +21,12 @@ from searx.languages import language_codes
 from searx.engines import (
     categories, engines, engine_shortcuts
 )
-import string
 import re
+import string
+import sys
+
+if sys.version_info[0] == 3:
+    unicode = str
 
 
 class RawTextQuery(object):
@@ -136,7 +140,7 @@ class SearchQuery(object):
     """container for all the search parameters (query, language, etc...)"""
 
     def __init__(self, query, engines, categories, lang, safesearch, pageno, time_range):
-        self.query = query
+        self.query = query.encode('utf-8')
         self.engines = engines
         self.categories = categories
         self.lang = lang

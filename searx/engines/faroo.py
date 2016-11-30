@@ -10,7 +10,6 @@
  @parse       url, title, content, publishedDate, img_src
 """
 
-from urllib import urlencode
 from json import loads
 import datetime
 from searx.utils import searx_useragent
@@ -55,7 +54,7 @@ def request(query, params):
 
     params['url'] = search_url.format(offset=offset,
                                       number_of_results=number_of_results,
-                                      query=urlencode({'q': query}),
+                                      query=params['urlencode']({'q': query}),
                                       language=language,
                                       categorie=categorie,
                                       api_key=api_key)

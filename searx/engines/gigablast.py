@@ -12,9 +12,7 @@
 
 from cgi import escape
 from json import loads
-from random import randint
 from time import time
-from urllib import urlencode
 
 # engine dependent config
 categories = ['general']
@@ -56,7 +54,7 @@ def request(query, params):
     else:
         safesearch = 0
 
-    search_path = search_string.format(query=urlencode({'q': query}),
+    search_path = search_string.format(query=params['urlencode']({'q': query}),
                                        offset=offset,
                                        number_of_results=number_of_results,
                                        rxikd=str(time())[:9],

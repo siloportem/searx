@@ -12,8 +12,12 @@
 
 from cgi import escape
 from json import loads
-from urllib import urlencode, unquote
 import re
+
+try:
+    from urllib import unquote
+except:
+    from urllib.parse import unquote
 
 # engine dependent config
 categories = ['general', 'images']
@@ -41,10 +45,9 @@ def request(query, params):
         ui_language = params['language'].split('_')[0]
 
     search_path = search_string.format(
-        query=urlencode({'query': query,
-                         'uiLanguage': ui_language,
-                         'region': region}),
-        page=params['pageno'])
+        query=params['urlencode']({'query': query, 'uiLanguage': ui_language, 'region': region}),
+        page=params['pageno']
+    )
 
     # image search query is something like 'image?{query}&page={page}'
     if params['category'] == 'images':
@@ -59,7 +62,7 @@ def request(query, params):
 def response(resp):
     results = []
 
-    json_regex = regex_json.search(resp.content)
+    json_regex = regex_json.search(resp.text)
 
     # check if results are returned
     if not json_regex:

@@ -12,12 +12,14 @@
  @todo        rewrite to api
 """
 
-
-from urllib import urlencode
-from urlparse import urljoin
 from lxml import html
 import re
 from searx.engines.xpath import extract_text
+
+try:
+    from urlparse import urljoin
+except:
+    from urllib.parse import urljoin
 
 # engine dependent config
 categories = ['images']
@@ -31,7 +33,7 @@ search_url = base_url + '/search?search?page={pageno}&type=photos&{query}'
 # do search-request
 def request(query, params):
     params['url'] = search_url.format(pageno=params['pageno'],
-                                      query=urlencode({'q': query}))
+                                      query=params['urlencode']({'q': query}))
 
     return params
 

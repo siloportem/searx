@@ -11,7 +11,6 @@
  @parse       url, title, content, publishedDate
 """
 
-from urllib import urlencode
 from json import loads
 from dateutil import parser
 
@@ -34,7 +33,7 @@ def request(query, params):
         language = params['language'].replace('_', '-')
 
     params['url'] = search_url.format(offset=offset,
-                                      query=urlencode({'q': query}),
+                                      query=params['urlencode']({'q': query}),
                                       lang=language)
 
     return params

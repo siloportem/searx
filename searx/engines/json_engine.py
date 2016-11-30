@@ -1,11 +1,15 @@
-from urllib import urlencode
-from json import loads
 from collections import Iterable
+from json import loads
+from sys import version_info
+
+if version_info[0] == 3:
+    unicode = str
 
 search_url = None
 url_query = None
 content_query = None
 title_query = None
+paging = False
 suggestion_query = ''
 results_query = ''
 
@@ -20,7 +24,7 @@ first_page_num = 1
 
 def iterate(iterable):
     if type(iterable) == dict:
-        it = iterable.iteritems()
+        it = iterable.items()
 
     else:
         it = enumerate(iterable)
@@ -77,7 +81,7 @@ def query(data, query_string):
 
 
 def request(query, params):
-    query = urlencode({'q': query})[2:]
+    query = params['urlencode']({'q': query})[2:]
 
     fp = {'query': query}
     if paging and search_url.find('{pageno}') >= 0:

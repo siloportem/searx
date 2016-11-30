@@ -10,11 +10,14 @@
  @parse       url, title, thumbnail, img_src, content
 """
 
-from urllib import urlencode
-from urlparse import urljoin
 from lxml import html
 import string
 import re
+
+try:
+    from urlparse import urljoin
+except:
+    from urllib.parse import urljoin
 
 # engine dependent config
 categories = ['images']
@@ -27,7 +30,7 @@ search_url = base_url + '/backend/search.php?{query}'
 
 # do search-request
 def request(query, params):
-    params['url'] = search_url.format(query=urlencode({'q': query}))
+    params['url'] = search_url.format(query=params['urlencode']({'q': query}))
 
     return params
 

@@ -10,7 +10,6 @@
 """
 
 from cgi import escape
-from urllib import urlencode
 from lxml import html
 from searx.engines.xpath import extract_text
 
@@ -61,7 +60,7 @@ def get_filesize_mul(suffix):
 
 # do search-request
 def request(query, params):
-    query = urlencode({'term': query})
+    query = params['urlencode']({'term': query})
     params['url'] = search_url.format(query=query, offset=params['pageno'])
     return params
 
@@ -90,7 +89,7 @@ def response(resp):
         try:
             file_size, suffix = result.xpath(xpath_filesize)[0].split(' ')
             file_size = int(float(file_size) * get_filesize_mul(suffix))
-        except Exception as e:
+        except Exception:
             file_size = None
 
         # seed count

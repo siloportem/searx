@@ -10,7 +10,6 @@
  @parse       url, title, content
 """
 
-from urllib import urlencode
 from json import loads
 from datetime import datetime
 
@@ -35,11 +34,11 @@ def request(query, params):
     if categories[0] and categories[0] in category_to_keyword:
 
         params['url'] = url.format(keyword=category_to_keyword[categories[0]],
-                                   query=urlencode({'q': query}),
+                                   query=params['urlencode']({'q': query}),
                                    offset=offset)
     else:
         params['url'] = url.format(keyword='web',
-                                   query=urlencode({'q': query}),
+                                   query=params['urlencode']({'q': query}),
                                    offset=offset)
 
     # add language tag if specified

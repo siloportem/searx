@@ -12,8 +12,6 @@
 """
 
 import re
-from cgi import escape
-from urllib import urlencode
 from lxml import html
 from searx.engines.xpath import extract_text
 from datetime import datetime
@@ -32,7 +30,7 @@ search_url = base_url + 'search?{query}'
 # do search-request
 def request(query, params):
     page = params['pageno'] - 1
-    query = urlencode({'q': query, 'p': page})
+    query = params['urlencode']({'q': query, 'p': page})
     params['url'] = search_url.format(query=query)
     return params
 
@@ -71,7 +69,7 @@ def response(resp):
             size_str = result.xpath('./dd/span[@class="s"]/text()')[0]
             size, suffix = size_str.split()
             params['filesize'] = int(size) * get_filesize_mul(suffix)
-        except Exception as e:
+        except:
             pass
 
         # does our link contain a valid SHA1 sum?
@@ -85,7 +83,7 @@ def response(resp):
             # Fri, 25 Mar 2016 16:29:01
             date = datetime.strptime(date_str, '%a, %d %b %Y %H:%M:%S')
             params['publishedDate'] = date
-        except Exception as e:
+        except:
             pass
 
         results.append(params)

@@ -10,7 +10,6 @@
  @parse       url, title, content
 """
 
-from urllib import urlencode
 from json import loads
 from cgi import escape
 
@@ -25,7 +24,7 @@ accept_header = 'application/vnd.github.preview.text-match+json'
 
 # do search-request
 def request(query, params):
-    params['url'] = search_url.format(query=urlencode({'q': query}))
+    params['url'] = search_url.format(query=params['urlencode']({'q': query}))
 
     params['headers']['Accept'] = accept_header
 

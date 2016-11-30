@@ -11,8 +11,6 @@
 """
 
 import re
-from cgi import escape
-from urllib import urlencode
 from lxml import html
 from searx.engines.xpath import extract_text
 from datetime import datetime
@@ -29,8 +27,7 @@ search_url = base_url + 'search.php?{query}'
 
 # do search-request
 def request(query, params):
-    query = urlencode({'page': params['pageno'],
-                       'terms': query})
+    query = params['urlencode']({'page': params['pageno'], 'terms': query})
     params['url'] = search_url.format(query=query)
     return params
 
@@ -51,7 +48,7 @@ def response(resp):
     size_re = re.compile(r'Size:\s*([\d.]+)(TB|GB|MB|B)', re.IGNORECASE)
 
     # processing the results, two rows at a time
-    for i in xrange(0, len(rows), 2):
+    for i in range(0, len(rows), 2):
         # parse the first row
         name_row = rows[i]
 
@@ -80,14 +77,14 @@ def response(resp):
                     groups = size_re.match(item).groups()
                     multiplier = get_filesize_mul(groups[1])
                     params['filesize'] = int(multiplier * float(groups[0]))
-                except Exception as e:
+                except:
                     pass
             elif item.startswith('Date:'):
                 try:
                     # Date: 2016-02-21 21:44 UTC
                     date = datetime.strptime(item, 'Date: %Y-%m-%d %H:%M UTC')
                     params['publishedDate'] = date
-                except Exception as e:
+                except:
                     pass
             elif item.startswith('Comment:'):
                 params['content'] = item

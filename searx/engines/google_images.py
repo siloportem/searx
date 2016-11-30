@@ -10,7 +10,6 @@
  @parse       url, title, img_src
 """
 
-from urllib import urlencode
 from json import loads
 from lxml import html
 
@@ -48,8 +47,8 @@ def request(query, params):
     if safesearch and params['safesearch']:
         search_options['safe'] = 'on'
 
-    params['url'] = search_url.format(query=urlencode({'q': query}),
-                                      search_options=urlencode(search_options))
+    params['url'] = search_url.format(query=params['urlencode']({'q': query}),
+                                      search_options=params['urlencode'](search_options))
 
     return params
 

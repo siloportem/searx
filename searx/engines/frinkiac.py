@@ -10,7 +10,6 @@ Frinkiac (Images)
 """
 
 from json import loads
-from urllib import urlencode
 
 categories = ['images']
 
@@ -22,7 +21,7 @@ IMAGE_URL = '{base}img/{episode}/{timestamp}.jpg'
 
 
 def request(query, params):
-    params['url'] = SEARCH_URL.format(base=BASE, query=urlencode({'q': query}))
+    params['url'] = SEARCH_URL.format(base=BASE, query=params['urlencode']({'q': query}))
     return params
 
 
@@ -35,7 +34,9 @@ def response(resp):
 
         results.append({'template': 'images.html',
                         'url': RESULT_URL.format(base=BASE,
-                                                 query=urlencode({'p': 'caption', 'e': episode, 't': timestamp})),
+                                                 query=resp.search_params['urlencode'](
+                                                     {'p': 'caption', 'e': episode, 't': timestamp}
+                                                 )),
                         'title': episode,
                         'content': '',
                         'thumbnail_src': THUMB_URL.format(base=BASE, episode=episode, timestamp=timestamp),

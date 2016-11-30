@@ -13,7 +13,6 @@
  More info on api-key : https://www.flickr.com/services/apps/create/
 """
 
-from urllib import urlencode
 from json import loads
 
 categories = ['images']
@@ -37,7 +36,7 @@ def build_flickr_url(user_id, photo_id):
 
 
 def request(query, params):
-    params['url'] = url.format(text=urlencode({'text': query}),
+    params['url'] = url.format(text=params['urlencode']({'text': query}),
                                api_key=api_key,
                                nb_per_page=nb_per_page,
                                page=params['pageno'])

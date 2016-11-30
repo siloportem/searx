@@ -11,7 +11,6 @@
 """
 
 from json import loads
-from urllib import urlencode
 
 # engine dependent config
 categories = ['music']
@@ -29,8 +28,7 @@ embedded_url = '<iframe data-src="https://embed.spotify.com/?uri=spotify:track:{
 def request(query, params):
     offset = (params['pageno'] - 1) * 20
 
-    params['url'] = search_url.format(query=urlencode({'q': query}),
-                                      offset=offset)
+    params['url'] = search_url.format(query=params['urlencode']({'q': query}), offset=offset)
 
     return params
 

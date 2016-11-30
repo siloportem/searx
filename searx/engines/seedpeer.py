@@ -8,12 +8,14 @@
 # @stable      yes (HTML can change)
 # @parse       url, title, content, seed, leech, magnetlink
 
-from urlparse import urljoin
-from cgi import escape
-from urllib import quote
 from lxml import html
 from operator import itemgetter
-from searx.engines.xpath import extract_text
+
+try:
+    from urllib import quote
+    from urlparse import urljoin
+except:
+    from urllib.parse import urljoin, quote
 
 
 url = 'http://www.seedpeer.eu/'

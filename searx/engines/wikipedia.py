@@ -11,11 +11,15 @@
 """
 
 from json import loads
-from urllib import urlencode, quote
+
+try:
+    from urllib import quote
+except:
+    from urllib.parse import quote
 
 # search-url
-base_url = 'https://{language}.wikipedia.org/'
-search_postfix = 'w/api.php?'\
+base_url = u'https://{language}.wikipedia.org/'
+search_url = base_url + u'w/api.php?'\
     'action=query'\
     '&format=json'\
     '&{query}'\
@@ -29,20 +33,16 @@ search_postfix = 'w/api.php?'\
 # set language in base_url
 def url_lang(lang):
     if lang == 'all':
-        language = 'en'
+        return 'en'
     else:
-        language = lang.split('_')[0]
-
-    return base_url.format(language=language)
+        return lang.split('_')[0]
 
 
 # do search-request
 def request(query, params):
-    if query.islower():
-        query += '|' + query.title()
 
-    params['url'] = url_lang(params['language']) \
-        + search_postfix.format(query=urlencode({'titles': query}))
+    params['url'] = search_url.format(query=params['urlencode']({'titles': query}),
+                                      language=url_lang(params['language']))
 
     return params
 
@@ -74,7 +74,7 @@ def extract_first_paragraph(content, title, image):
 def response(resp):
     results = []
 
-    search_result = loads(resp.content)
+    search_result = loads(resp.text)
 
     # wikipedia article's unique id
     # first valid id is assumed to be the requested article

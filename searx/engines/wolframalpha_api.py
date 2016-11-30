@@ -8,7 +8,6 @@
 # @stable      yes
 # @parse       url, infobox
 
-from urllib import urlencode
 from lxml import etree
 
 # search-url
@@ -37,9 +36,8 @@ image_pods = {'VisualRepresentation',
 
 # do search-request
 def request(query, params):
-    params['url'] = search_url.format(query=urlencode({'input': query}),
-                                      api_key=api_key)
-    params['headers']['Referer'] = site_url.format(query=urlencode({'i': query}))
+    params['url'] = search_url.format(query=params['urlencode']({'input': query}), api_key=api_key)
+    params['headers']['Referer'] = site_url.format(query=params['urlencode']({'i': query}))
 
     return params
 
@@ -56,7 +54,7 @@ def replace_pua_chars(text):
                  u'\uf74e': 'i',        # imaginary number
                  u'\uf7d9': '='}        # equals sign
 
-    for k, v in pua_chars.iteritems():
+    for k, v in pua_chars.items():
         text = text.replace(k, v)
 
     return text
@@ -66,7 +64,7 @@ def replace_pua_chars(text):
 def response(resp):
     results = []
 
-    search_results = etree.XML(resp.content)
+    search_results = etree.XML(resp.text)
 
     # return empty array if there are no results
     if search_results.xpath(failure_xpath):

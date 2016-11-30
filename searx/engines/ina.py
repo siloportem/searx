@@ -12,11 +12,14 @@
 # @todo        embedded (needs some md5 from video page)
 
 from json import loads
-from urllib import urlencode
 from lxml import html
-from HTMLParser import HTMLParser
 from searx.engines.xpath import extract_text
 from dateutil import parser
+
+try:
+    from HTMLParser import HTMLParser
+except:
+    from html.parser import HTMLParser
 
 # engine dependent config
 categories = ['videos']
@@ -40,7 +43,7 @@ content_xpath = './/p[@class="media-body__summary"]'
 def request(query, params):
     params['url'] = search_url.format(ps=page_size,
                                       start=params['pageno'] * page_size,
-                                      query=urlencode({'q': query}))
+                                      query=params['urlencode']({'q': query}))
 
     return params
 

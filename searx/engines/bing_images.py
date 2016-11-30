@@ -15,7 +15,6 @@
               limited response to 10 images
 """
 
-from urllib import urlencode
 from lxml import html
 from json import loads
 import re
@@ -55,7 +54,7 @@ def request(query, params):
         language = params['language'].replace('_', '-')
 
     search_path = search_string.format(
-        query=urlencode({'q': query}),
+        query=params['urlencode']({'q': query}),
         offset=offset)
 
     params['cookies']['SRCHHPGUSR'] = \

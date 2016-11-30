@@ -10,7 +10,7 @@ answerers_dir = dirname(realpath(__file__))
 def load_answerers():
     answerers = []
     for filename in listdir(answerers_dir):
-        if not isdir(join(answerers_dir, filename)):
+        if not isdir(join(answerers_dir, filename)) or filename.startswith('_'):
             continue
         module = load_module('answerer.py', join(answerers_dir, filename))
         if not hasattr(module, 'keywords') or not isinstance(module.keywords, tuple) or not len(module.keywords):
@@ -30,7 +30,7 @@ def get_answerers_by_keywords(answerers):
 
 def ask(query):
     results = []
-    query_parts = filter(None, query.query.split())
+    query_parts = list(filter(None, query.query.split()))
 
     if query_parts[0] not in answerers_by_keywords:
         return results

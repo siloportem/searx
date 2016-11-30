@@ -11,7 +11,6 @@
 """
 
 from json import loads
-from urllib import urlencode
 from dateutil import parser
 
 # engine dependent config
@@ -30,7 +29,7 @@ embedded_url = '<iframe scrolling="no" frameborder="0" allowTransparency="true" 
 def request(query, params):
     offset = (params['pageno'] - 1) * 10
 
-    params['url'] = search_url.format(query=urlencode({'q': query}),
+    params['url'] = search_url.format(query=params['urlencode']({'q': query}),
                                       offset=offset)
 
     return params

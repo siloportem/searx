@@ -12,11 +12,14 @@
 # @todo        rewrite to api
 # @todo        set content-parameter with correct data
 
-from urllib import urlencode
 from lxml import html
-from HTMLParser import HTMLParser
 from searx.engines.xpath import extract_text
 from dateutil import parser
+
+try:
+    from HTMLParser import HTMLParser
+except:
+    from html.parser import HTMLParser
 
 # engine dependent config
 categories = ['videos']
@@ -41,7 +44,7 @@ embedded_url = '<iframe data-src="//player.vimeo.com/video{videoid}" ' +\
 # do search-request
 def request(query, params):
     params['url'] = search_url.format(pageno=params['pageno'],
-                                      query=urlencode({'q': query}))
+                                      query=params['urlencode']({'q': query}))
 
     return params
 

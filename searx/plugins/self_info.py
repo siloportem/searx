@@ -22,7 +22,7 @@ default_on = True
 
 
 # Self User Agent regex
-p = re.compile('.*user[ -]agent.*', re.IGNORECASE)
+p = re.compile(b'.*user[ -]agent.*', re.IGNORECASE)
 
 
 # attach callback to the post search hook

@@ -10,11 +10,15 @@
  @parse       url, title, content, publishedDate, thumbnail
 """
 
-from urllib import quote_plus
 from json import loads
 from lxml import html
 from cgi import escape
 from dateutil import parser
+
+try:
+    from urllib import quote_plus
+except:
+    from urllib.parse import quote_plus
 
 # engine dependent config
 categories = ['news', 'social media']

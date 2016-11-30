@@ -9,7 +9,6 @@
 # @stable      yes
 # @parse       (general)    url, title, content
 
-from urllib import urlencode
 from lxml.html import fromstring
 from searx.engines.xpath import extract_text
 
@@ -32,7 +31,7 @@ search_url = '/?do=search'\
 def request(query, params):
 
     params['url'] = base_url +\
-        search_url.format(query=urlencode({'id': query}))
+        search_url.format(query=params['urlencode']({'id': query}))
 
     return params
 

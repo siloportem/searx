@@ -14,7 +14,6 @@
 """
 
 from lxml import etree
-from urllib import urlencode
 from searx.utils import searx_useragent
 from cgi import escape
 from datetime import datetime
@@ -61,7 +60,7 @@ def request(query, params):
     # basic search
     offset = (params['pageno'] - 1) * number_of_results
 
-    string_args = dict(query=urlencode({'query': query}),
+    string_args = dict(query=params['urlencode']({'query': query}),
                        offset=offset,
                        hits=number_of_results)
 
@@ -74,7 +73,7 @@ def request(query, params):
 def response(resp):
     results = []
 
-    search_results = etree.XML(resp.content)
+    search_results = etree.XML(resp.text)
 
     for entry in search_results.xpath('./result/doc'):
         content = "No description available"

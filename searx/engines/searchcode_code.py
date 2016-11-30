@@ -10,7 +10,6 @@
  @parse       url, title, content
 """
 
-from urllib import urlencode
 from json import loads
 
 
@@ -31,8 +30,7 @@ code_endings = {'cs': 'c#',
 
 # do search-request
 def request(query, params):
-    params['url'] = search_url.format(query=urlencode({'q': query}),
-                                      pageno=params['pageno'] - 1)
+    params['url'] = search_url.format(query=params['urlencode']({'q': query}), pageno=params['pageno'] - 1)
 
     # Disable SSL verification
     # error: (60) SSL certificate problem: unable to get local issuer

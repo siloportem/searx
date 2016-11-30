@@ -1,7 +1,6 @@
 import json
-from urllib import urlencode
-from re import compile, sub
 from lxml import html
+from re import compile
 from searx.utils import html_to_text
 from searx.engines.xpath import extract_text
 
@@ -22,7 +21,7 @@ def result_to_text(url, text, htmlResult):
 
 
 def request(query, params):
-    params['url'] = url.format(query=urlencode({'q': query}))
+    params['url'] = url.format(query=params['urlencode']({'q': query}))
     params['headers']['Accept-Language'] = params['language']
     return params
 

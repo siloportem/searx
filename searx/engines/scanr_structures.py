@@ -10,9 +10,7 @@
  @parse       url, title, content, img_src
 """
 
-from urllib import urlencode
 from json import loads, dumps
-from dateutil import parser
 from searx.utils import html_to_text
 
 # engine dependent config
