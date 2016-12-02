@@ -15,11 +15,7 @@
 from lxml import html
 import re
 from searx.engines.xpath import extract_text
-
-try:
-    from urlparse import urljoin
-except:
-    from urllib.parse import urljoin
+from searx.url_utils import urlencode, urljoin
 
 # engine dependent config
 categories = ['images']
@@ -33,7 +29,7 @@ search_url = base_url + '/search?search?page={pageno}&type=photos&{query}'
 # do search-request
 def request(query, params):
     params['url'] = search_url.format(pageno=params['pageno'],
-                                      query=params['urlencode']({'q': query}))
+                                      query=urlencode({'q': query}))
 
     return params
 

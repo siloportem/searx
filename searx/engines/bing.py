@@ -16,6 +16,7 @@
 from cgi import escape
 from lxml import html
 from searx.engines.xpath import extract_text
+from searx.url_utils import urlencode
 
 # engine dependent config
 categories = ['general']
@@ -36,7 +37,7 @@ def request(query, params):
                                          query.decode('utf-8')).encode('utf-8')
 
     search_path = search_string.format(
-        query=params['urlencode']({'q': query}),
+        query=urlencode({'q': query}),
         offset=offset)
 
     params['url'] = base_url + search_path

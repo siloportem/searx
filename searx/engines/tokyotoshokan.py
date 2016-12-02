@@ -15,6 +15,7 @@ from lxml import html
 from searx.engines.xpath import extract_text
 from datetime import datetime
 from searx.engines.nyaa import int_or_zero, get_filesize_mul
+from searx.url_utils import urlencode
 
 # engine dependent config
 categories = ['files', 'videos', 'music']
@@ -27,7 +28,7 @@ search_url = base_url + 'search.php?{query}'
 
 # do search-request
 def request(query, params):
-    query = params['urlencode']({'page': params['pageno'], 'terms': query})
+    query = urlencode({'page': params['pageno'], 'terms': query})
     params['url'] = search_url.format(query=query)
     return params
 

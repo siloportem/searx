@@ -9,12 +9,13 @@
 # @stable      no (HTML can change)
 # @parse       url, title, content, publishedDate
 
+from datetime import datetime, timedelta
+from dateutil import parser
 from lxml import html
+import re
 from searx.engines.xpath import extract_text, extract_url
 from searx.engines.yahoo import parse_url
-from datetime import datetime, timedelta
-import re
-from dateutil import parser
+from searx.url_utils import urlencode
 
 # engine dependent config
 categories = ['news']
@@ -43,7 +44,7 @@ def request(query, params):
         language = params['language'].split('_')[0]
 
     params['url'] = search_url.format(offset=offset,
-                                      query=params['urlencode']({'p': query}),
+                                      query=urlencode({'p': query}),
                                       lang=language)
 
     # TODO required?

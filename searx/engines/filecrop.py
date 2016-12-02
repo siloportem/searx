@@ -1,3 +1,5 @@
+from searx.url_utils import urlencode
+
 try:
     from HTMLParser import HTMLParser
 except:
@@ -75,7 +77,7 @@ class FilecropResultParser(HTMLParser):
 
 def request(query, params):
     index = 1 + (params['pageno'] - 1) * 30
-    params['url'] = search_url.format(query=params['urlencode']({'w': query}), index=index)
+    params['url'] = search_url.format(query=urlencode({'w': query}), index=index)
     return params
 
 

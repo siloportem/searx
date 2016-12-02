@@ -10,6 +10,7 @@ Frinkiac (Images)
 """
 
 from json import loads
+from searx.url_utils import urlencode
 
 categories = ['images']
 
@@ -21,7 +22,7 @@ IMAGE_URL = '{base}img/{episode}/{timestamp}.jpg'
 
 
 def request(query, params):
-    params['url'] = SEARCH_URL.format(base=BASE, query=params['urlencode']({'q': query}))
+    params['url'] = SEARCH_URL.format(base=BASE, query=urlencode({'q': query}))
     return params
 
 
@@ -34,7 +35,7 @@ def response(resp):
 
         results.append({'template': 'images.html',
                         'url': RESULT_URL.format(base=BASE,
-                                                 query=resp.search_params['urlencode'](
+                                                 query=resp.search_urlencode(
                                                      {'p': 'caption', 'e': episode, 't': timestamp}
                                                  )),
                         'title': episode,

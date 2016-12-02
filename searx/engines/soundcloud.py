@@ -16,11 +16,7 @@ from lxml import html
 from dateutil import parser
 from searx import logger
 from searx.poolrequests import get as http_get
-
-try:
-    from urllib import quote_plus
-except:
-    from urllib.parse import quote_plus
+from searx.url_utils import quote_plus, urlencode
 
 try:
     from StringIO import StringIO
@@ -74,7 +70,7 @@ guest_client_id = get_client_id()
 def request(query, params):
     offset = (params['pageno'] - 1) * 20
 
-    params['url'] = search_url.format(query=params['urlencode']({'q': query}),
+    params['url'] = search_url.format(query=urlencode({'q': query}),
                                       offset=offset,
                                       client_id=guest_client_id)
 

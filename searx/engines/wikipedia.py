@@ -11,11 +11,7 @@
 """
 
 from json import loads
-
-try:
-    from urllib import quote
-except:
-    from urllib.parse import quote
+from searx.url_utils import quote, urlencode
 
 # search-url
 base_url = u'https://{language}.wikipedia.org/'
@@ -41,7 +37,7 @@ def url_lang(lang):
 # do search-request
 def request(query, params):
 
-    params['url'] = search_url.format(query=params['urlencode']({'titles': query}),
+    params['url'] = search_url.format(query=urlencode({'titles': query}),
                                       language=url_lang(params['language']))
 
     return params

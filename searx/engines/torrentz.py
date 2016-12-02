@@ -11,11 +11,12 @@
  @parse        url, title, publishedDate, seed, leech, filesize, magnetlink
 """
 
-import re
-from lxml import html
-from searx.engines.xpath import extract_text
 from datetime import datetime
+from lxml import html
+import re
 from searx.engines.nyaa import int_or_zero, get_filesize_mul
+from searx.engines.xpath import extract_text
+from searx.url_utils import urlencode
 
 # engine dependent config
 categories = ['files', 'videos', 'music']
@@ -30,7 +31,7 @@ search_url = base_url + 'search?{query}'
 # do search-request
 def request(query, params):
     page = params['pageno'] - 1
-    query = params['urlencode']({'q': query, 'p': page})
+    query = urlencode({'q': query, 'p': page})
     params['url'] = search_url.format(query=query)
     return params
 

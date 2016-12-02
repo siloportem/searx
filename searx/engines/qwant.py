@@ -12,6 +12,7 @@
 
 from json import loads
 from datetime import datetime
+from searx.url_utils import urlencode
 
 # engine dependent config
 categories = None
@@ -34,11 +35,11 @@ def request(query, params):
     if categories[0] and categories[0] in category_to_keyword:
 
         params['url'] = url.format(keyword=category_to_keyword[categories[0]],
-                                   query=params['urlencode']({'q': query}),
+                                   query=urlencode({'q': query}),
                                    offset=offset)
     else:
         params['url'] = url.format(keyword='web',
-                                   query=params['urlencode']({'q': query}),
+                                   query=urlencode({'q': query}),
                                    offset=offset)
 
     # add language tag if specified

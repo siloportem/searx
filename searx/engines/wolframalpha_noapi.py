@@ -12,6 +12,7 @@ from json import loads
 from time import time
 
 from searx.poolrequests import get as http_get
+from searx.url_utils import urlencode
 
 # search-url
 url = 'https://www.wolframalpha.com/'
@@ -62,8 +63,8 @@ def request(query, params):
     # obtain token if last update was more than an hour
     if time() - token['last_updated'] > 3600:
         obtain_token()
-    params['url'] = search_url.format(query=params['urlencode']({'input': query}), token=token['value'])
-    params['headers']['Referer'] = referer_url.format(query=params['urlencode']({'i': query}))
+    params['url'] = search_url.format(query=urlencode({'input': query}), token=token['value'])
+    params['headers']['Referer'] = referer_url.format(query=urlencode({'i': query}))
 
     return params
 

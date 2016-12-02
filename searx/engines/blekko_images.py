@@ -11,6 +11,7 @@
 """
 
 from json import loads
+from searx.url_utils import urlencode
 
 # engine dependent config
 categories = ['images']
@@ -32,7 +33,7 @@ def request(query, params):
     c = (params['pageno'] - 1) * 48
 
     params['url'] = base_url +\
-        search_url.format(query=params['urlencode']({'q': query}),
+        search_url.format(query=urlencode({'q': query}),
                           c=c)
 
     if params['pageno'] != 1:

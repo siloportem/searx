@@ -15,6 +15,7 @@
 from json import loads
 from cgi import escape
 from datetime import datetime
+from searx.url_utils import urlencode
 
 # engine dependent config
 categories = ['videos']
@@ -36,7 +37,7 @@ def request(query, params):
         locale = params['language']
 
     params['url'] = search_url.format(
-        query=params['urlencode']({'search': query, 'localization': locale}),
+        query=urlencode({'search': query, 'localization': locale}),
         pageno=params['pageno'])
 
     return params

@@ -14,11 +14,7 @@
 
 from json import loads
 from string import Formatter
-
-try:
-    from urllib import quote
-except:
-    from urllib.parse import quote
+from searx.url_utils import urlencode, quote
 
 # engine dependent config
 categories = ['general']
@@ -41,7 +37,7 @@ search_postfix = 'w/api.php?action=query'\
 def request(query, params):
     offset = (params['pageno'] - 1) * number_of_results
 
-    string_args = dict(query=params['urlencode']({'srsearch': query}),
+    string_args = dict(query=urlencode({'srsearch': query}),
                        offset=offset,
                        limit=number_of_results)
 

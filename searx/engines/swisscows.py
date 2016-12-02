@@ -13,11 +13,7 @@
 from cgi import escape
 from json import loads
 import re
-
-try:
-    from urllib import unquote
-except:
-    from urllib.parse import unquote
+from searx.url_utils import unquote, urlencode
 
 # engine dependent config
 categories = ['general', 'images']
@@ -45,7 +41,7 @@ def request(query, params):
         ui_language = params['language'].split('_')[0]
 
     search_path = search_string.format(
-        query=params['urlencode']({'query': query, 'uiLanguage': ui_language, 'region': region}),
+        query=urlencode({'query': query, 'uiLanguage': ui_language, 'region': region}),
         page=params['pageno']
     )
 

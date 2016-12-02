@@ -14,6 +14,7 @@
 from searx import logger
 from searx.poolrequests import get
 from searx.engines.xpath import extract_text
+from searx.url_utils import urlencode
 
 from json import loads
 from lxml.html import fromstring
@@ -59,7 +60,7 @@ def request(query, params):
         language = 'en'
 
     params['url'] = url_search.format(
-        query=params['urlencode']({'label': query, 'language': language}))
+        query=urlencode({'label': query, 'language': language}))
     return params
 
 
@@ -74,7 +75,7 @@ def response(resp):
 
     # TODO: make requests asynchronous to avoid timeout when result_count > 1
     for wikidata_id in wikidata_ids[:result_count]:
-        url = url_detail.format(query=resp.search_params['urlencode']({'page': wikidata_id, 'uselang': language}))
+        url = url_detail.format(query=resp.search_urlencode({'page': wikidata_id, 'uselang': language}))
         htmlresponse = get(url)
         jsonresponse = loads(htmlresponse.text)
         results += getDetail(jsonresponse, wikidata_id, language, resp.search_params['language'])

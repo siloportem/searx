@@ -13,8 +13,9 @@
 
 from json import loads
 from lxml import html
-from searx.engines.xpath import extract_text
 from dateutil import parser
+from searx.engines.xpath import extract_text
+from searx.url_utils import urlencode
 
 try:
     from HTMLParser import HTMLParser
@@ -43,7 +44,7 @@ content_xpath = './/p[@class="media-body__summary"]'
 def request(query, params):
     params['url'] = search_url.format(ps=page_size,
                                       start=params['pageno'] * page_size,
-                                      query=params['urlencode']({'q': query}))
+                                      query=urlencode({'q': query}))
 
     return params
 

@@ -9,6 +9,7 @@
 # @parse       url, infobox
 
 from lxml import etree
+from searx.url_utils import urlencode
 
 # search-url
 search_url = 'https://api.wolframalpha.com/v2/query?appid={api_key}&{query}'
@@ -36,8 +37,8 @@ image_pods = {'VisualRepresentation',
 
 # do search-request
 def request(query, params):
-    params['url'] = search_url.format(query=params['urlencode']({'input': query}), api_key=api_key)
-    params['headers']['Referer'] = site_url.format(query=params['urlencode']({'i': query}))
+    params['url'] = search_url.format(query=urlencode({'input': query}), api_key=api_key)
+    params['headers']['Referer'] = site_url.format(query=urlencode({'i': query}))
 
     return params
 

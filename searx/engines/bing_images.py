@@ -18,6 +18,7 @@
 from lxml import html
 from json import loads
 import re
+from searx.url_utils import urlencode
 
 # engine dependent config
 categories = ['images']
@@ -54,7 +55,7 @@ def request(query, params):
         language = params['language'].replace('_', '-')
 
     search_path = search_string.format(
-        query=params['urlencode']({'q': query}),
+        query=urlencode({'q': query}),
         offset=offset)
 
     params['cookies']['SRCHHPGUSR'] = \

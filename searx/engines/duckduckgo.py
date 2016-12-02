@@ -16,6 +16,7 @@
 from lxml.html import fromstring
 from searx.engines.xpath import extract_text
 from searx.languages import language_codes
+from searx.url_utils import urlencode
 
 # engine dependent config
 categories = ['general']
@@ -61,10 +62,10 @@ def request(query, params):
 
     if locale:
         params['url'] = url.format(
-            query=params['urlencode']({'q': query, 'kl': locale}), offset=offset)
+            query=urlencode({'q': query, 'kl': locale}), offset=offset)
     else:
         params['url'] = url.format(
-            query=params['urlencode']({'q': query}), offset=offset)
+            query=urlencode({'q': query}), offset=offset)
 
     if params['time_range'] in time_range_dict:
         params['url'] += time_range_url.format(range=time_range_dict[params['time_range']])

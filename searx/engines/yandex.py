@@ -12,6 +12,7 @@
 from cgi import escape
 from lxml import html
 from searx.search import logger
+from searx.url_utils import urlencode
 
 logger = logger.getChild('yandex engine')
 
@@ -39,7 +40,7 @@ def request(query, params):
     lang = params['language'].split('_')[0]
     host = base_url.format(tld=language_map.get(lang) or default_tld)
     params['url'] = host + search_url.format(page=params['pageno'] - 1,
-                                             query=params['urlencode']({'text': query}))
+                                             query=urlencode({'text': query}))
     return params
 
 

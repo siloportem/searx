@@ -13,6 +13,7 @@ from cgi import escape
 from lxml import html, etree
 from searx.engines.xpath import extract_text, extract_url
 from searx.search import logger
+from searx.url_utils import urlencode
 
 try:
     from urlparse import urlparse, parse_qsl
@@ -185,7 +186,7 @@ def request(query, params):
         google_hostname = default_hostname
 
     params['url'] = search_url.format(offset=offset,
-                                      query=params['urlencode']({'q': query}),
+                                      query=urlencode({'q': query}),
                                       hostname=google_hostname,
                                       lang=url_lang)
     if params['time_range'] in time_range_dict:

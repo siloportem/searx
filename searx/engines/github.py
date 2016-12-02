@@ -12,6 +12,7 @@
 
 from json import loads
 from cgi import escape
+from searx.url_utils import urlencode
 
 # engine dependent config
 categories = ['it']
@@ -24,7 +25,7 @@ accept_header = 'application/vnd.github.preview.text-match+json'
 
 # do search-request
 def request(query, params):
-    params['url'] = search_url.format(query=params['urlencode']({'q': query}))
+    params['url'] = search_url.format(query=urlencode({'q': query}))
 
     params['headers']['Accept'] = accept_header
 

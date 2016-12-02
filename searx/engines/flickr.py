@@ -14,6 +14,7 @@
 """
 
 from json import loads
+from searx.url_utils import urlencode
 
 categories = ['images']
 
@@ -36,7 +37,7 @@ def build_flickr_url(user_id, photo_id):
 
 
 def request(query, params):
-    params['url'] = url.format(text=params['urlencode']({'text': query}),
+    params['url'] = url.format(text=urlencode({'text': query}),
                                api_key=api_key,
                                nb_per_page=nb_per_page,
                                page=params['pageno'])

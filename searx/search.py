@@ -36,11 +36,6 @@ try:
 except:
     from _thread import start_new_thread
 
-try:
-    from urllib import urlencode
-except:
-    from urllib.parse import urlencode
-
 if sys.version_info[0] == 3:
     unicode = str
 
@@ -100,8 +95,7 @@ def default_request_params():
         'data': {},
         'url': '',
         'cookies': {},
-        'verify': True,
-        'urlencode': urlencode
+        'verify': True
     }
 
 
@@ -147,7 +141,6 @@ def get_search_query_from_webapp(preferences, form):
     query = None
     query_engines = []
     query_categories = []
-    query_paging = False
     query_pageno = 1
     query_lang = 'all'
     query_time_range = None

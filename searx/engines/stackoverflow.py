@@ -13,11 +13,7 @@
 from cgi import escape
 from lxml import html
 from searx.engines.xpath import extract_text
-
-try:
-    from urlparse import urljoin
-except:
-    from urllib.parse import urljoin
+from searx.url_utils import urlencode, urljoin
 
 # engine dependent config
 categories = ['it']
@@ -35,7 +31,7 @@ content_xpath = './/div[@class="excerpt"]'
 
 # do search-request
 def request(query, params):
-    params['url'] = search_url.format(query=params['urlencode']({'q': query}), pageno=params['pageno'])
+    params['url'] = search_url.format(query=urlencode({'q': query}), pageno=params['pageno'])
 
     return params
 

@@ -1,6 +1,7 @@
 from collections import Iterable
 from json import loads
 from sys import version_info
+from searx.url_utils import urlencode
 
 if version_info[0] == 3:
     unicode = str
@@ -81,7 +82,7 @@ def query(data, query_string):
 
 
 def request(query, params):
-    query = params['urlencode']({'q': query})[2:]
+    query = urlencode({'q': query})[2:]
 
     fp = {'query': query}
     if paging and search_url.find('{pageno}') >= 0:

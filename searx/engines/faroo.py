@@ -13,6 +13,7 @@
 from json import loads
 import datetime
 from searx.utils import searx_useragent
+from searx.url_utils import urlencode
 
 # engine dependent config
 categories = ['general', 'news']
@@ -54,7 +55,7 @@ def request(query, params):
 
     params['url'] = search_url.format(offset=offset,
                                       number_of_results=number_of_results,
-                                      query=params['urlencode']({'q': query}),
+                                      query=urlencode({'q': query}),
                                       language=language,
                                       categorie=categorie,
                                       api_key=api_key)

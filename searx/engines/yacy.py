@@ -14,6 +14,7 @@
 
 from json import loads
 from dateutil import parser
+from searx.url_utils import urlencode
 
 # engine dependent config
 categories = ['general', 'images']  # TODO , 'music', 'videos', 'files'
@@ -43,7 +44,7 @@ def request(query, params):
     search_type = search_types.get(params.get('category'), '0')
 
     params['url'] = base_url +\
-        search_url.format(query=params['urlencode']({'query': query}),
+        search_url.format(query=urlencode({'query': query}),
                           offset=offset,
                           limit=number_of_results,
                           search_type=search_type)

@@ -10,6 +10,7 @@
 
 from json import loads
 from dateutil import parser
+from searx.url_utils import urlencode
 
 # engine dependent config
 categories = ['videos', 'music']
@@ -30,7 +31,7 @@ base_youtube_url = 'https://www.youtube.com/watch?v='
 
 # do search-request
 def request(query, params):
-    params['url'] = search_url.format(query=params['urlencode']({'q': query}),
+    params['url'] = search_url.format(query=urlencode({'q': query}),
                                       api_key=api_key)
 
     # add language tag if specified

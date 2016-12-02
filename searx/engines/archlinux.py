@@ -14,11 +14,7 @@
 from cgi import escape
 from lxml import html
 from searx.engines.xpath import extract_text
-
-try:
-    from urlparse import urljoin
-except:
-    from urllib.parse import urljoin
+from searx.url_utils import urlencode, urljoin
 
 # engine dependent config
 categories = ['it']
@@ -112,7 +108,7 @@ def request(query, params):
         query += '(' + main_langs[language] + ')'
 
     # prepare the request parameters
-    query = params['urlencode']({'search': query})
+    query = urlencode({'search': query})
     offset = (params['pageno'] - 1) * 20
 
     # get request URLs for our language of choice

@@ -13,12 +13,7 @@
 
 from lxml import html
 from searx.engines.xpath import extract_text, extract_url
-
-try:
-    from urllib import urlencode
-    from urlparse import unquote
-except:
-    from urllib.parse import urlencode, unquote
+from searx.url_utils import unquote, urlencode
 
 # engine dependent config
 categories = ['general']

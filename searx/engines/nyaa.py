@@ -12,6 +12,7 @@
 from cgi import escape
 from lxml import html
 from searx.engines.xpath import extract_text
+from searx.url_utils import urlencode
 
 # engine dependent config
 categories = ['files', 'images', 'videos', 'music']
@@ -60,7 +61,7 @@ def get_filesize_mul(suffix):
 
 # do search-request
 def request(query, params):
-    query = params['urlencode']({'term': query})
+    query = urlencode({'term': query})
     params['url'] = search_url.format(query=query, offset=params['pageno'])
     return params
 

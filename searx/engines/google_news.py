@@ -13,6 +13,7 @@
 
 from json import loads
 from dateutil import parser
+from searx.url_utils import urlencode
 
 # search-url
 categories = ['news']
@@ -33,7 +34,7 @@ def request(query, params):
         language = params['language'].replace('_', '-')
 
     params['url'] = search_url.format(offset=offset,
-                                      query=params['urlencode']({'q': query}),
+                                      query=urlencode({'q': query}),
                                       lang=language)
 
     return params

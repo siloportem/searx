@@ -13,11 +13,7 @@
 from lxml import html
 import string
 import re
-
-try:
-    from urlparse import urljoin
-except:
-    from urllib.parse import urljoin
+from searx.url_utils import urlencode, urljoin
 
 # engine dependent config
 categories = ['images']
@@ -30,7 +26,7 @@ search_url = base_url + '/backend/search.php?{query}'
 
 # do search-request
 def request(query, params):
-    params['url'] = search_url.format(query=params['urlencode']({'q': query}))
+    params['url'] = search_url.format(query=urlencode({'q': query}))
 
     return params
 

@@ -11,6 +11,7 @@
 """
 
 from json import loads
+from searx.url_utils import urlencode
 
 # engine dependent config
 categories = ['music']
@@ -29,7 +30,7 @@ embedded_url = '<iframe scrolling="no" frameborder="0" allowTransparency="true" 
 def request(query, params):
     offset = (params['pageno'] - 1) * 25
 
-    params['url'] = search_url.format(query=params['urlencode']({'q': query}), offset=offset)
+    params['url'] = search_url.format(query=urlencode({'q': query}), offset=offset)
 
     return params
 

@@ -11,11 +11,7 @@
 from lxml import html
 from searx.engines.xpath import extract_text
 from searx.utils import list_get
-
-try:
-    from urllib import quote_plus
-except:
-    from urllib.parse import quote_plus
+from searx.url_utils import quote_plus
 
 # engine dependent config
 categories = ['videos', 'music']

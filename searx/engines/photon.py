@@ -12,6 +12,7 @@
 
 from json import loads
 from searx.utils import searx_useragent
+from searx.url_utils import urlencode
 
 # engine dependent config
 categories = ['map']
@@ -31,7 +32,7 @@ allowed_languages = ['de', 'en', 'fr', 'it']
 # do search-request
 def request(query, params):
     params['url'] = base_url +\
-        search_string.format(query=params['urlencode']({'q': query}),
+        search_string.format(query=urlencode({'q': query}),
                              limit=number_of_results)
 
     if params['language'] != 'all':

@@ -14,10 +14,11 @@
 """
 
 from lxml import etree
-from searx.utils import searx_useragent
 from cgi import escape
 from datetime import datetime
 import re
+from searx.url_utils import urlencode
+from searx.utils import searx_useragent
 
 
 categories = ['science']
@@ -60,7 +61,7 @@ def request(query, params):
     # basic search
     offset = (params['pageno'] - 1) * number_of_results
 
-    string_args = dict(query=params['urlencode']({'query': query}),
+    string_args = dict(query=urlencode({'query': query}),
                        offset=offset,
                        hits=number_of_results)
 

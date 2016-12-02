@@ -16,6 +16,7 @@ from json import loads
 from time import time
 import re
 from searx.engines import logger
+from searx.url_utils import urlencode
 
 
 logger = logger.getChild('flickr-noapi')
@@ -47,7 +48,7 @@ def _get_time_range_url(time_range):
 
 
 def request(query, params):
-    params['url'] = (search_url.format(query=params['urlencode']({'text': query}), page=params['pageno'])
+    params['url'] = (search_url.format(query=urlencode({'text': query}), page=params['pageno'])
                      + _get_time_range_url(params['time_range']))
     return params
 
