@@ -119,10 +119,10 @@ def response(resp):
     # append infobox
     results.append({'infobox': infobox_title,
                     'attributes': result_chunks,
-                    'urls': [{'title': 'Wolfram|Alpha', 'url': resp.request.headers['Referer'].decode('utf8')}]})
+                    'urls': [{'title': 'Wolfram|Alpha', 'url': resp.request.headers['Referer']}]})
 
     # append link to site
-    results.append({'url': resp.request.headers['Referer'].decode('utf8'),
+    results.append({'url': resp.request.headers['Referer'],
                     'title': title,
                     'content': result_content})
 

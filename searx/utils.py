@@ -15,9 +15,9 @@ from searx import settings
 from searx import logger
 
 try:
-    import cStringIO
+    from cStringIO import StringIO
 except:
-    from io import StringIO as cStringIO
+    from io import StringIO
 
 try:
     from HTMLParser import HTMLParser
@@ -151,7 +151,7 @@ class UnicodeWriter:
 
     def __init__(self, f, dialect=csv.excel, encoding="utf-8", **kwds):
         # Redirect output to a queue
-        self.queue = cStringIO.StringIO()
+        self.queue = StringIO()
         self.writer = csv.writer(self.queue, dialect=dialect, **kwds)
         self.stream = f
         self.encoder = getincrementalencoder(encoding)()
@@ -166,11 +166,10 @@ class UnicodeWriter:
         self.writer.writerow(unicode_row)
         # Fetch UTF-8 output from the queue ...
         data = self.queue.getvalue()
-        data = data.decode("utf-8")
         # ... and reencode it into the target encoding
         data = self.encoder.encode(data)
         # write to the target stream
-        self.stream.write(data)
+        self.stream.write(data.decode('utf-8'))
         # empty queue
         self.queue.truncate(0)
 

@@ -11,7 +11,6 @@
 """
 
 from lxml import html
-import string
 import re
 from searx.url_utils import urlencode, urljoin
 
@@ -54,7 +53,7 @@ def response(resp):
         cur_element += result_part
 
         # fix xml-error
-        cur_element = string.replace(cur_element, '"></a>', '"/></a>')
+        cur_element = cur_element.replace('"></a>', '"/></a>')
 
         dom = html.fromstring(cur_element)
         link = dom.xpath('//a')[0]

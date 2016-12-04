@@ -19,7 +19,7 @@ db = 1
 
 
 def normalize_name(name):
-    name = name.lower().replace('-', ' ').rstrip('s')
+    name = name.decode('utf-8').lower().replace('-', ' ').rstrip('s')
     name = re.sub(' +', ' ', name)
     return unicodedata.normalize('NFKD', name).lower()
 

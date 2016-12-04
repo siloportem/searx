@@ -82,9 +82,9 @@ except:
     from urllib.parse import urlencode, urlparse, urljoin
 
 try:
-    import cStringIO
+    from cStringIO import StringIO
 except:
-    from io import StringIO as cStringIO
+    from io import StringIO
 
 # serve pages with HTTP/1.1
 from werkzeug.serving import WSGIRequestHandler
@@ -473,12 +473,12 @@ def index():
         number_of_results = 0
 
     if output_format == 'json':
-        return Response(json.dumps({'query': search_query.query,
+        return Response(json.dumps({'query': search_query.query.decode('utf-8'),
                                     'number_of_results': number_of_results,
                                     'results': results}),
                         mimetype='application/json')
     elif output_format == 'csv':
-        csv = UnicodeWriter(cStringIO.StringIO())
+        csv = UnicodeWriter(StringIO())
         keys = ('title', 'url', 'content', 'host', 'engine', 'score')
         csv.writerow(keys)
         for row in results:

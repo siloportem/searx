@@ -37,7 +37,7 @@ def url_lang(lang):
 # do search-request
 def request(query, params):
     if query.islower():
-        query += '|' + query.title()
+        query = u'{0}|{1}'.format(query, query.title())
 
     params['url'] = search_url.format(query=urlencode({'titles': query}),
                                       language=url_lang(params['language']))
@@ -97,7 +97,7 @@ def response(resp):
         return []
 
     # link to wikipedia article
-    wikipedia_link = url_lang(resp.search_params['language']) \
+    wikipedia_link = base_url.format(language=url_lang(resp.search_params['language'])) \
         + 'wiki/' + quote(title.replace(' ', '_').encode('utf8'))
 
     results.append({'url': wikipedia_link, 'title': title})

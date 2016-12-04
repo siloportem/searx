@@ -46,7 +46,7 @@ def response(resp):
     search_res = loads(resp.text)
 
     # return empty array if there are no results
-    if search_res.get('total') < 1:
+    if search_res.get('total', 0) < 1:
         return []
 
     # parse results
