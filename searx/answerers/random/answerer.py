@@ -29,9 +29,9 @@ def random_int():
     return unicode(random.randint(-random_int_max, random_int_max))
 
 
-random_types = {u'string': random_string,
-                u'int': random_int,
-                u'float': random_float}
+random_types = {b'string': random_string,
+                b'int': random_int,
+                b'float': random_float}
 
 
 # required answerer function

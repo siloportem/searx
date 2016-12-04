@@ -163,9 +163,9 @@ class UnicodeWriter:
                 unicode_row.append(col.encode('utf-8').strip())
             else:
                 unicode_row.append(col)
-        self.writer.writerow(unicode_row)
+        self.writer.writerow([x.decode('utf-8') if hasattr(x, 'decode') else x for x in unicode_row])
         # Fetch UTF-8 output from the queue ...
-        data = self.queue.getvalue()
+        data = self.queue.getvalue().strip('\x00')
         # ... and reencode it into the target encoding
         data = self.encoder.encode(data)
         # write to the target stream
