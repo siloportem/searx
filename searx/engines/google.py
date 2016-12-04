@@ -12,7 +12,7 @@ import re
 from cgi import escape
 from lxml import html, etree
 from searx.engines.xpath import extract_text, extract_url
-from searx.search import logger
+from searx import logger
 from searx.url_utils import urlencode
 
 try:

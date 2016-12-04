@@ -75,7 +75,7 @@ def response(resp):
 
     # TODO: make requests asynchronous to avoid timeout when result_count > 1
     for wikidata_id in wikidata_ids[:result_count]:
-        url = url_detail.format(query=resp.search_urlencode({'page': wikidata_id, 'uselang': language}))
+        url = url_detail.format(query=urlencode({'page': wikidata_id, 'uselang': language}))
         htmlresponse = get(url)
         jsonresponse = loads(htmlresponse.text)
         results += getDetail(jsonresponse, wikidata_id, language, resp.search_params['language'])

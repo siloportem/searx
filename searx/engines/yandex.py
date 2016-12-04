@@ -11,7 +11,7 @@
 
 from cgi import escape
 from lxml import html
-from searx.search import logger
+from searx import logger
 from searx.url_utils import urlencode
 
 logger = logger.getChild('yandex engine')

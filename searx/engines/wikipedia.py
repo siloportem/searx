@@ -36,6 +36,8 @@ def url_lang(lang):
 
 # do search-request
 def request(query, params):
+    if query.islower():
+        query += '|' + query.title()
 
     params['url'] = search_url.format(query=urlencode({'titles': query}),
                                       language=url_lang(params['language']))

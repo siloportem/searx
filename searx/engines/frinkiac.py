@@ -35,9 +35,7 @@ def response(resp):
 
         results.append({'template': 'images.html',
                         'url': RESULT_URL.format(base=BASE,
-                                                 query=resp.search_urlencode(
-                                                     {'p': 'caption', 'e': episode, 't': timestamp}
-                                                 )),
+                                                 query=urlencode({'p': 'caption', 'e': episode, 't': timestamp})),
                         'title': episode,
                         'content': '',
                         'thumbnail_src': THUMB_URL.format(base=BASE, episode=episode, timestamp=timestamp),
