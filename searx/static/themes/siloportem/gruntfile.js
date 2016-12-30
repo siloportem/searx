@@ -13,7 +13,7 @@ module.exports = function(grunt) {
     },
     uglify: {
       options: {
-        banner: '/*! oscar/searx.min.js | <%= grunt.template.today("dd-mm-yyyy") %> | https://github.com/asciimoo/searx */\n'
+        banner: '/*! siloportem/searx.min.js | <%= grunt.template.today("dd-mm-yyyy") %> | https://github.com/asciimoo/searx */\n'
       },
       dist: {
         files: {
@@ -36,20 +36,16 @@ module.exports = function(grunt) {
     less: {
         development: {
             options: {
-                paths: ["less/pointhi", "less/logicodev"]
-                //banner: '/*! less/oscar/oscar.css | <%= grunt.template.today("dd-mm-yyyy") %> | https://github.com/asciimoo/searx */\n'
+                paths: ["less"]
             },
-            files: {"css/pointhi.css": "less/pointhi/oscar.less",
-                    "css/logicodev.css": "less/logicodev/oscar.less"}
+            files: {"css/siloportem.min.css": "less/siloportem.less"}
         },
         production: {
             options: {
-                paths: ["less/pointhi", "less/logicodev"],
-                //banner: '/*! less/oscar/oscar.css | <%= grunt.template.today("dd-mm-yyyy") %> | https://github.com/asciimoo/searx */\n',
+                paths: ["less"],
                 cleancss: true
             },
-            files: {"css/pointhi.min.css": "less/pointhi/oscar.less",
-                    "css/logicodev.min.css": "less/logicodev/oscar.less"}
+            files: {"css/siloportem.min.css": "less/siloportem.less"}
         },
         bootstrap: {
             options: {
@@ -64,8 +60,8 @@ module.exports = function(grunt) {
             files: ['<%= jshint.files %>'],
             tasks: ['jshint', 'concat', 'uglify']
         },
-        oscar_styles: {
-            files: ['less/pointhi/**/*.less'],
+        siloportem_styles: {
+            files: ['less/**/*.less'],
             tasks: ['less:development', 'less:production']
         },
         bootstrap_styles: {

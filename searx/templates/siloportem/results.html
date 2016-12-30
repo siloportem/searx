@@ -1,11 +1,11 @@
-{% extends "oscar/base.html" %}
+{% extends "siloportem/base.html" %}
 {% block title %}{{ q|e }} - {% endblock %}
 {% block meta %}<link rel="alternate" type="application/rss+xml" title="Searx search: {{ q|e }}" href="{{ url_for('index') }}?q={{ q|urlencode }}&amp;format=rss&amp;{% for category in selected_categories %}category_{{ category }}=1&amp;{% endfor %}pageno={{ pageno }}&amp;time_range={{ time_range }}">{% endblock %}
 {% block content %}
     <div class="row">
         <div class="col-sm-8" id="main_results">
             <h1 class="sr-only">{{ _('Search results') }}</h1>
-            {% include 'oscar/search.html' %}
+            {% include 'siloportem/search.html' %}
 
             {% if answers %}
             {% for answer in answers %}
@@ -19,15 +19,15 @@
             <div class="result {% if result['template'] %}result-{{ result.template|replace('.html', '') }}{% else %}result-default{% endif %}">
                 {% set index = loop.index %}
                 {% if result.template %}
-                    {% include get_result_template('oscar', result['template']) %}
+                    {% include get_result_template('siloportem', result['template']) %}
                 {% else %}
-                    {% include 'oscar/result_templates/default.html' %}
+                    {% include 'siloportem/result_templates/default.html' %}
                 {% endif %}
             </div>
             {% endfor %}
 
             {% if not results and not answers %}
-                {% include 'oscar/messages/no_results.html' %}
+                {% include 'siloportem/messages/no_results.html' %}
             {% endif %}
 
             <div class="clearfix"></div>
@@ -94,7 +94,7 @@
             {% endif %}
             {% if infoboxes %}
                 {% for infobox in infoboxes %}
-                    {% include 'oscar/infobox.html' %}
+                    {% include 'siloportem/infobox.html' %}
                 {% endfor %}
             {% endif %}
 

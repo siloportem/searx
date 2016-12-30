@@ -16,7 +16,7 @@
  */
 
 requirejs.config({
-    baseUrl: './static/themes/oscar/js',
+    baseUrl: './static/themes/siloportem/js',
     paths: {
         app: '../app'
     }

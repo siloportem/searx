@@ -1,5 +1,5 @@
-{% from 'oscar/macros.html' import preferences_item_header, preferences_item_header_rtl, preferences_item_footer, preferences_item_footer_rtl, checkbox_toggle %}
-{% extends "oscar/base.html" %}
+{% from 'siloportem/macros.html' import preferences_item_header, preferences_item_header_rtl, preferences_item_footer, preferences_item_footer_rtl, checkbox_toggle %}
+{% extends "siloportem/base.html" %}
 {% block title %}{{ _('preferences') }} - {% endblock %}
 {% block content %}
 <div>
@@ -27,20 +27,20 @@
                     <div class="row form-group">
                         {% if rtl %}
                         <div class="col-sm-11 col-md-10">
-                            {% include 'oscar/categories.html' %}
+                            {% include 'siloportem/categories.html' %}
                         </div>
                         <label class="col-sm-3 col-md-2">{{ _('Default categories') }}</label>
                         {% else %}
                         <label class="col-sm-3 col-md-2">{{ _('Default categories') }}</label>
                         <div class="col-sm-11 col-md-10 search-categories">
-                            {% include 'oscar/categories.html' %}
+                            {% include 'siloportem/categories.html' %}
                         </div>
                         {% endif %}
                     </div>
                     {% set language_label = _('Search language') %}
                     {% set language_info = _('What language do you prefer for search?') %}
                     {{ preferences_item_header(language_info, language_label, rtl) }}
-						{% include 'oscar/languages.html' %}
+						{% include 'siloportem/languages.html' %}
                     {{ preferences_item_footer(language_info, language_label, rtl) }}
 
                     {% set locale_label = _('Interface language') %}
@@ -101,13 +101,6 @@
                             {% endfor %}
                         </select>
                     {{ preferences_item_footer(theme_info, theme_label, rtl) }}
-
-                    {{ preferences_item_header(_('Choose style for this theme'), _('Style'), rtl) }}
-                        <select class="form-control" name='oscar-style'>
-                            <option value="logicodev" >Logicodev</option>
-                            <option value="pointhi" {% if cookies['oscar-style'] == 'pointhi' %}selected="selected"{% endif %}>Pointhi</option>
-                        </select>
-                    {{ preferences_item_footer(_('Choose style for this theme'), _('Style'), rtl) }}
 
                     {% set label = _('Results on new tabs') %}
                     {% set info = _('Open result links on new browser tabs') %}
@@ -275,7 +268,7 @@
                     {% endfor %}
                 </table>
                 {% else %}
-                    {% include 'oscar/messages/no_cookies.html' %}
+                    {% include 'siloportem/messages/no_cookies.html' %}
                 {% endif %}
             </div>
         </div>
