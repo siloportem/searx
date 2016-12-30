@@ -2,12 +2,13 @@
 <div class="navbar navbar-siloportem" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header{% if rtl %} navbar-right{% endif %}">
-            <a class="navbar-brand" href="{{ url_for('index') }}">{{ instance_name }}</a>
+            <a class="navbar-brand" href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='img/logo.png') }}" alt="seekthenet"/></a>
+        </div>
+        <div class="navbar-header navbar-right">
+            <ul> <!-- results.html -->
+                <li><a class="navbar-brand" href="https://github.com/siloportem/searx" target="_blank"><img src="{{ url_for('static', filename='img/github.png') }}" alt="source"/></a></li>
+                <li><a class="navbar-brand" href="{{ url_for('preferences') }}"><img src="{{ url_for('static', filename='img/preferences.png') }}" alt="preferences"/></a></li>
+            </ul>
         </div>
     </div><!--/.container-fluid -->
 </div>
-<div class="menu menu-{% if rtl %}left{% else %}right{% endif %}">
-    <ul> <!-- results.html -->
-        <li{% if template_name == 'preferences.html' %} class="active"{% endif %}><a href="{{ url_for('preferences') }}" class="hmarg">{{ _('preferences') }}</a></li>
-    </ul>
-</div><!--/.nav-collapse -->

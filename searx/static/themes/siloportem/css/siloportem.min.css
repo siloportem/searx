@@ -44,7 +44,7 @@ input[type=checkbox]:not (:checked )+.label_hide_if_not_checked, input[type=chec
 	display: block;
 	overflow: hidden;
 	cursor: pointer;
-	border: 2px solid #FFF !important;
+	border: 2px solid #002b36 !important;
 	border-radius: 50px !important
 }
 
@@ -63,18 +63,18 @@ input[type=checkbox]:not (:checked )+.label_hide_if_not_checked, input[type=chec
 	font-size: 20px;
 	box-sizing: border-box;
 	content: "";
-	background-color: #EEE
+	background-color: #073642
 }
 
 .onoffswitch-switch {
 	display: block;
 	width: 37px;
-	background-color: #0C0;
+	background-color: #268bd2;
 	position: absolute;
 	top: 0;
 	bottom: 0;
 	right: 0;
-	border: 2px solid #FFF !important;
+	border: 2px solid #002b36 !important;
 	border-radius: 50px !important;
 	transition: all .3s ease-in 0s
 }
@@ -85,7 +85,7 @@ input[type=checkbox]:not (:checked )+.label_hide_if_not_checked, input[type=chec
 
 .onoffswitch-checkbox:checked+.onoffswitch-label .onoffswitch-switch {
 	right: 71px;
-	background-color: #A1A1A1
+	background-color: #93a1a1
 }
 
 .result_header {
@@ -206,9 +206,9 @@ input[type=checkbox]:not (:checked )+.label_hide_if_not_checked, input[type=chec
 	font-size: 1.3rem;
 	font-weight: 400;
 	background-color: #fff;
-	border: #DDD 1px solid;
+	border: #073642 1px solid;
 	border-right: none;
-	color: #333;
+	color: #268bd2;
 	padding-bottom: .8rem;
 	padding-top: .8rem;
 	text-align: center
@@ -217,14 +217,14 @@ input[type=checkbox]:not (:checked )+.label_hide_if_not_checked, input[type=chec
 .search_categories label:last-child, #categories label:last-child,
 	.search_categories .input-group-addon:last-child, #categories .input-group-addon:last-child
 	{
-	border-right: #DDD 1px solid
+	border-right: #073642 1px solid
 }
 
 .search_categories input[type=checkbox]:checked+label, #categories input[type=checkbox]:checked+label
 	{
-	color: #000;
+	color: #268bd2;
 	font-weight: 700;
-	background-color: #EEE
+	background-color: #002b36
 }
 
 #advanced-search-container {
@@ -239,9 +239,9 @@ input[type=checkbox]:not (:checked )+.label_hide_if_not_checked, input[type=chec
 	font-size: 1.3rem;
 	font-weight: 400;
 	background-color: #fff;
-	border: #DDD 1px solid;
+	border: #073642 1px solid;
 	border-right: none;
-	color: #333;
+	color: #268bd2;
 	padding-bottom: .8rem;
 	padding-left: 1.2rem;
 	padding-right: 1.2rem
@@ -249,7 +249,7 @@ input[type=checkbox]:not (:checked )+.label_hide_if_not_checked, input[type=chec
 
 #advanced-search-container label:last-child, #advanced-search-container .input-group-addon:last-child
 	{
-	border-right: #DDD 1px solid
+	border-right: #073642 1px solid
 }
 
 #advanced-search-container input[type=radio] {
@@ -257,9 +257,9 @@ input[type=checkbox]:not (:checked )+.label_hide_if_not_checked, input[type=chec
 }
 
 #advanced-search-container input[type=radio]:checked+label {
-	color: #000;
+	color: #268bd2;
 	font-weight: 700;
-	background-color: #EEE
+	background-color: #002b36
 }
 
 #check-advanced {
@@ -586,6 +586,8 @@ input[type=checkbox]:not (:checked )+.label_hide_if_not_checked, input[type=chec
 	line-height: 40px
 }
 
+
+
 .menu a {
 	color: #268bd2;
 	text-decoration: none
@@ -612,6 +614,7 @@ input[type=checkbox]:not (:checked )+.label_hide_if_not_checked, input[type=chec
 	margin: 0;
 	float: left;
 	list-style: none
+	
 }
 
 .menu-right {
@@ -625,6 +628,24 @@ input[type=checkbox]:not (:checked )+.label_hide_if_not_checked, input[type=chec
 .navbar-siloportem {
 	background-color: #073642;
 	border-color: #002b36
+}
+
+.navbar-siloportem ul {
+	padding: 0;
+	margin: 0
+}
+
+.navbar-siloportem ul li {
+	padding: 0 0;
+	margin: 0;
+	float: left;
+	list-style: none
+	
+}
+
+.navbar-siloportem img {
+	height: 100%;
+	width: auto
 }
 
 .navbar-siloportem .navbar-brand {
@@ -664,12 +685,12 @@ input[type=checkbox]:not (:checked )+.label_hide_if_not_checked, input[type=chec
 }
 
 .navbar-siloportem .navbar-toggle {
-	border-color: #ddd
+	border-color: #073642
 }
 
 .navbar-siloportem .navbar-toggle:hover, .navbar-siloportem .navbar-toggle:focus
 	{
-	background-color: #ddd
+	background-color: #073642
 }
 
 .navbar-siloportem .navbar-toggle .icon-bar {
