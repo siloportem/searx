@@ -462,6 +462,17 @@ engines:
 #        - ...
 #    disabled : True
 
+  - name : semantic scholar
+    engine : xpath
+    paging : True
+    search_url : https://www.semanticscholar.org/search?q={query}&sort=relevance&page={pageno}&ae=false
+    results_xpath : //article
+    url_xpath : .//div[@class="search-result-title"]/a/@href
+    title_xpath : .//div[@class="search-result-title"]/a
+    content_xpath : .//div[@class="search-result-abstract"]
+    shortcut : se
+    categories : science
+
   - name : spotify
     engine : spotify
     shortcut : stf
@@ -588,6 +599,10 @@ engines:
     timeout : 10.0
     disabled : True
 
+  - name : 1337x
+    engine : 1337x
+    shortcut : 1337x
+    disabled : True
 
 #The blekko technology and team have joined IBM Watson! -> https://blekko.com/
 #  - name : blekko images
@@ -612,6 +627,7 @@ engines:
 locales:
     en : English
     bg : Български (Bulgarian)
+    cs : Čeština (Czech)
     de : Deutsch (German)
     el_GR : Ελληνικά (Greek_Greece)
     eo : Esperanto (Esperanto)
@@ -626,5 +642,6 @@ locales:
     pt_BR : Português (Portuguese_Brazil)
     ro : Română (Romanian)
     ru : Русский (Russian)
+    sv : Svenska (Swedish)
     tr : Türkçe (Turkish)
     zh : 中文 (Chinese)
