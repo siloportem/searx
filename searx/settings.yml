@@ -339,6 +339,17 @@ engines:
     timeout : 4.0
     disabled : True
 
+  - name : library genesis
+    engine : xpath
+    search_url : http://libgen.io/search.php?req={query}
+    url_xpath : //a[contains(@href,"bookfi.net")]/@href
+    title_xpath : //a[contains(@href,"book/")]/text()[1]
+    content_xpath : //td/a[1][contains(@href,"=author")]/text()
+    categories : general
+    timeout : 7.0
+    disabled : True
+    shortcut : lg
+
   - name : lobste.rs
     engine : xpath
     search_url : https://lobste.rs/search?utf8=%E2%9C%93&q={query}&what=stories&order=relevance
@@ -452,6 +463,11 @@ engines:
   - name : searchcode code
     engine : searchcode_code
     shortcut : scc
+    disabled : True
+
+  - name : framalibre
+    engine : framalibre
+    shortcut : frl
     disabled : True
 
 #  - name : searx
@@ -629,9 +645,11 @@ locales:
     bg : Български (Bulgarian)
     cs : Čeština (Czech)
     de : Deutsch (German)
+    de_DE : Deutsch (German_Germany)
     el_GR : Ελληνικά (Greek_Greece)
     eo : Esperanto (Esperanto)
     es : Español (Spanish)
+    fi : Suomi (Finnish)
     fr : Français (French)
     he : עברית (Hebrew)
     hu : Magyar (Hungarian)
@@ -642,6 +660,8 @@ locales:
     pt_BR : Português (Portuguese_Brazil)
     ro : Română (Romanian)
     ru : Русский (Russian)
+    sk : Slovenčina (Slovak)
     sv : Svenska (Swedish)
     tr : Türkçe (Turkish)
+    uk : українська мова (Ukrainian)
     zh : 中文 (Chinese)
