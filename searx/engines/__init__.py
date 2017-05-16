@@ -72,12 +72,11 @@ def load_engine(engine_data):
             if engine_data['categories'] == 'none':
                 engine.categories = []
             else:
-                engine.categories = map(
-                    str.strip, engine_data['categories'].split(','))
+                engine.categories = list(map(str.strip, engine_data['categories'].split(',')))
             continue
         setattr(engine, param_name, engine_data[param_name])
 
-    for arg_name, arg_value in engine_default_args.iteritems():
+    for arg_name, arg_value in engine_default_args.items():
         if not hasattr(engine, arg_name):
             setattr(engine, arg_name, arg_value)
 
@@ -218,4 +217,5 @@ def get_engines_stats():
 def initialize_engines(engine_list):
     for engine_data in engine_list:
         engine = load_engine(engine_data)
-        engines[engine.name] = engine
+        if engine is not None:
+            engines[engine.name] = engine

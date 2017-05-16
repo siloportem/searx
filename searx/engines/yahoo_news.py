@@ -9,13 +9,13 @@
 # @stable      no (HTML can change)
 # @parse       url, title, content, publishedDate
 
-from urllib import urlencode
+import re
+from datetime import datetime, timedelta
 from lxml import html
 from searx.engines.xpath import extract_text, extract_url
 from searx.engines.yahoo import parse_url, _fetch_supported_languages, supported_languages_url
-from datetime import datetime, timedelta
-import re
 from dateutil import parser
+from searx.url_utils import urlencode
 
 # engine dependent config
 categories = ['news']
@@ -80,16 +80,19 @@ def response(resp):
 
         # still useful ?
         if re.match("^[0-9]+ minute(s|) ago$", publishedDate):
-            publishedDate = datetime.now() - timedelta(minutes=int(re.match(r'\d+', publishedDate).group()))  # noqa
+            publishedDate = datetime.now() - timedelta(minutes=int(re.match(r'\d+', publishedDate).group()))
+        elif re.match("^[0-9]+ days? ago$", publishedDate):
+            publishedDate = datetime.now() - timedelta(days=int(re.match(r'\d+', publishedDate).group()))
+        elif re.match("^[0-9]+ hour(s|), [0-9]+ minute(s|) ago$", publishedDate):
+            timeNumbers = re.findall(r'\d+', publishedDate)
+            publishedDate = datetime.now()\
+                - timedelta(hours=int(timeNumbers[0]))\
+                - timedelta(minutes=int(timeNumbers[1]))
         else:
-            if re.match("^[0-9]+ hour(s|), [0-9]+ minute(s|) ago$",
-                        publishedDate):
-                timeNumbers = re.findall(r'\d+', publishedDate)
-                publishedDate = datetime.now()\
-                    - timedelta(hours=int(timeNumbers[0]))\
-                    - timedelta(minutes=int(timeNumbers[1]))
-            else:
+            try:
                 publishedDate = parser.parse(publishedDate)
+            except:
+                publishedDate = datetime.now()
 
         if publishedDate.year == 1900:
             publishedDate = publishedDate.replace(year=datetime.now().year)
