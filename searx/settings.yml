@@ -5,7 +5,7 @@ general:
 search:
     safe_search : 0 # Filter results. 0: None, 1: Moderate, 2: Strict
     autocomplete : "" # Existing autocomplete backends: "dbpedia", "duckduckgo", "google", "startpage", "wikipedia" - leave blank to turn it off by default
-    language : "all"
+    language : "en-US"
 
 server:
     port : 8888
@@ -65,6 +65,10 @@ engines:
     shortcut : arx
     categories : science
     timeout : 4.0
+
+  - name : asksteem
+    engine : asksteem
+    shortcut : as
 
   - name : base
     engine : base
@@ -398,15 +402,7 @@ engines:
     shortcut : lo
 
   - name : microsoft academic
-    engine : json_engine
-    paging : True
-    search_url : https://academic.microsoft.com/api/search/GetEntityResults?query=%40{query}%40&filters=&offset={pageno}&limit=8&correlationId=undefined
-    results_query : results
-    url_query : u
-    title_query : dn
-    content_query : d
-    page_size : 8
-    first_page_num : 0
+    engine : microsoft_academic
     categories : science
     shortcut : ma
 
@@ -719,6 +715,7 @@ locales:
     eo : Esperanto (Esperanto)
     es : Español (Spanish)
     fi : Suomi (Finnish)
+    fil : Wikang Filipino (Filipino)
     fr : Français (French)
     he : עברית (Hebrew)
     hr : Hrvatski (Croatian)
@@ -737,6 +734,7 @@ locales:
     tr : Türkçe (Turkish)
     uk : українська мова (Ukrainian)
     zh : 中文 (Chinese)
+    zh_TW : 國語 (Taiwanese Mandarin)
 
 doi_resolvers :
   oadoi.org : 'https://oadoi.org/'
